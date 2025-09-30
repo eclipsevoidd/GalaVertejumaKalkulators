@@ -1,106 +1,66 @@
 package pakotne;
 
-import java.text.DecimalFormat;
-import java.util.Scanner;
-
 public class GalvenaKlase {
-	static String[] studenti;
-	static String[] kriteriji;
-	static int[] kriterijaSvars;
-	static int[][] kriterijaVertejums;
-	static double[] semestraVertejums;
+	
 	public static void main(String[] args) {
-		int studSk, kritSk;
-		Scanner scan = new Scanner(System.in);
-		DecimalFormat df = new DecimalFormat("0.#");
-		
-		// Audzēkņu skaita ievade
+		int input;
 		do {
-			System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
-			while(!scan.hasNextInt()) {
-				System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
-				scan.next();
+			System.out.println("1. Ievadīt audzēkņus\n2. Ievadīt kritērijus\n"
+					 + "3. Ievadīt kritēriju svarus\n4. Ievadīt vērtejumus\n"
+					 + "5. Labot kritēriju\n6. Labot kritērija svaru\n"
+					 + "7. Labot iegūto vērtējumu\n8. Aprēķināt gala vērtējumu\n"
+					 + "9. Saglabāt rezultātus failā\n10. Nolasīt rezultātus no faila\n11. Beigt programmu");
+			input = MetozuKlase.scan.nextInt();
+			
+			switch(input) {
+			case 1:
+				MetozuKlase.ievaditAudzeknus();
+				break;
+			case 2:
+				MetozuKlase.ievaditKriterijus();
+				break;
+			case 3:
+				MetozuKlase.ievaditKritSvarus();
+				break;
+			case 4:
+				MetozuKlase.ievaditVertejumus();
+				break;
+			case 5:
+				MetozuKlase.labotKriteriju();
+				break;
+			case 6:
+				MetozuKlase.labotKritSvaru();
+				break;
+			case 7:
+				MetozuKlase.labotIegutoVertejumu();
+				break;
+			case 8:
+				MetozuKlase.aprekins();
+				break;
+			case 9:
+				MetozuKlase.glabatFaila();
+				break;
+			case 10:
+				MetozuKlase.lasitFailu();
+				break;
+			case 11:
+				System.out.println("Visu labu!");
+				default:
+					System.out.println("Nav tāda opcija!");
+					break;
 			}
-			studSk = scan.nextInt();
-		}while(studSk<1);
-		studenti = new String[studSk];
-		
-		// Vērtēšanas kritēriju skaita ievade
-		do {
-			System.out.println("Kāds būs kritēriju skaits?");
-			while(!scan.hasNextInt()) {
-				System.out.println("Kāds būs kritēriju skaits?");
-				scan.next();
-			}
-			kritSk = scan.nextInt();
-		}while(kritSk<1);
-		kriteriji = new String[kritSk];
-		kriterijaSvars = new int[kritSk];
-		kriterijaVertejums = new int[studSk][kritSk];
-		semestraVertejums = new double[studSk];
-		
-		scan.nextLine();
+		} while(input != 11);
 		
 		// Ievada audzēkņu vārdus, uzvārdus
-		for(int i=0; i<studenti.length; i++) {
-			do {
-				System.out.println("Ievadi "+(i+1)+". studentu");
-				studenti[i] = scan.nextLine().trim();
-			} while(!studenti[i].matches("^[\\p{L} ]+$"));
-		}
+		
 		
 		// Definē kritērijus
-		int maxSvars = 100, sk = 1;
-		double atlSvars;
-		for(int i=0; i<kriteriji.length; i++) {
-			do {
-				System.out.println("Ievadi "+(i+1)+". kritēriju");
-				kriteriji[i] = scan.nextLine().trim();
-			} while(!kriteriji[i].matches("^[\\p{L} ]+$"));
 			
-			// Norāda katra kritērija svaru
-			do {
-				System.out.println("Ievadi "+(i+1)+". kritērija svaru (max: "+maxSvars+")");
-				while(!scan.hasNextInt()) {
-					System.out.println("Ievadi "+(i+1)+". kritērija svaru");
-					scan.next();
-				}
-				kriterijaSvars[i] = scan.nextInt();
-				/* Minimālā KATRA ATLIKUŠĀ kritērija svars ir 5
-				 * kopējai svaru vērtībai ir jābūt 100 (ne mazāk, ne vairāk)
-				*/
-				atlSvars = (maxSvars - kriterijaSvars[i]) / (double)(kriteriji.length - sk);
-			} while(kriterijaSvars[i]>maxSvars || kriterijaSvars[i]<5 || 
-				  (i != kriteriji.length-1 && kriterijaSvars[i] == maxSvars) ||
-				  (i == kriteriji.length-1 && (maxSvars - kriterijaSvars[i])  > 0) 
-				  || atlSvars < 5);
-			maxSvars -= kriterijaSvars[i];
-			sk++;
-			scan.nextLine();
-		}
+		// Norāda katra kritērija svaru
 		
 		// Norāda vērtējumu kādu ieguvis katrs audzēknis par katru kritēriju
-		for(int i=0; i<kriterijaVertejums.length; i++) {
-			for(int j=0; j<kriterijaVertejums[i].length; j++) {
-				do {
-					System.out.println("Ievadi "+studenti[i]+" vērtējumu par kritēriju "+kriteriji[j]);
-					while(!scan.hasNextInt()) {
-						System.out.println("Ievadi "+studenti[i]+" vērtējumu par kritēriju "+kriteriji[j]);
-						scan.next();
-					}
-					kriterijaVertejums[i][j] = scan.nextInt();
-				}while(kriterijaVertejums[i][j]<0 || kriterijaVertejums[i][j]>10);
-			}
-		}
+		
 		
 		// Gala vērtējumu izvadīšana
-		for(int i=0; i<studenti.length; i++) {	
-			for(int j=0; j<kriteriji.length; j++) {
-				System.out.println("Studenta "+studenti[i]+" vērtējums par kritēriju "+kriteriji[j]+" ir "+kriterijaVertejums[i][j]+", kura svars ir "+kriterijaSvars[j]);
-			}
-			System.out.println("Semestra vērtējums ir "+df.format(semestraVertejums[i])+" balles"
-					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-		}
-		scan.close();
 	}
 }
