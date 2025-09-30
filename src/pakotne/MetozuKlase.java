@@ -12,7 +12,7 @@ public class MetozuKlase {
 	static String[] studenti;
 	
 	
-	static int maxSvars = 100, sk = 1;
+	static int sk = 1;
 	static double atlSvars;
 	
 	static Scanner scan = new Scanner(System.in);
@@ -62,6 +62,7 @@ public class MetozuKlase {
 	}
 	
 	static void ievaditKritSvarus() {
+		int maxSvars = 100;
 		for (int i = 0; i < kriteriji.length; i++) {
 			do {
 				System.out.println("Ievadi "+(i+1)+". kritērija svaru (max: "+maxSvars+")");

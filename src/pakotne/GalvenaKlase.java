@@ -1,23 +1,24 @@
 package pakotne;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class GalvenaKlase {
 	
-	static PrintWriter pw;
+	static FileWriter fw;
 	static FileReader fr;
 	
 	static void glabatFaila() throws IOException {
-		pw = new PrintWriter("dati.txt");
+		fw = new FileWriter("dati.txt");
 		for(int i=0; i<MetozuKlase.studenti.length; i++) {
 			for(int j=0; j<MetozuKlase.kriteriji.length; j++) {
-				pw.println("Studenta "+MetozuKlase.studenti[i]+" vērtējums par kritēriju "+
-			MetozuKlase.kriteriji[j]+" ir "+MetozuKlase.kriterijaVertejums[i][j]+", kura svars ir "+MetozuKlase.kriterijaSvars[j]);
+				fw.write("Studenta "+MetozuKlase.studenti[i]+" vērtējums par kritēriju "+
+			MetozuKlase.kriteriji[j]+" ir "+MetozuKlase.kriterijaVertejums[i][j]+", kura svars ir "+MetozuKlase.kriterijaSvars[j] + ".\n");
 			}
-			pw.println("Semestra vērtējums ir "+MetozuKlase.df.format(MetozuKlase.semestraVertejums[i])+" balles"
+			fw.write("Semestra vērtējums ir "+MetozuKlase.df.format(MetozuKlase.semestraVertejums[i])+" balles."
 					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+			fw.flush();
 		}
 	}
 	
@@ -74,6 +75,7 @@ public class GalvenaKlase {
 				break;
 			case 11:
 				System.out.println("Visu labu!");
+				fw.close();
 				default:
 					System.out.println("Nav tāda opcija!");
 					break;
