@@ -29,7 +29,6 @@ public class MetozuKlase {
 			studSk = scan.nextInt();
 		}while(studSk<1);
 		studenti = new String[studSk];
-		
 		for(int i=0; i<studenti.length; i++) {
 			do {
 				System.out.println("Ievadi "+(i+1)+". studentu");
@@ -99,20 +98,40 @@ public class MetozuKlase {
 		}
 	}
 	
-	static void labotKrieriju() {
-		
-	}
-	
 	static void labotKriteriju() {
-		
+		for(int i=0; i<kriteriji.length; i++) {
+			do {
+				System.out.println("Ievadi "+(i+1)+". kritēriju");
+				kriteriji[i] = scan.nextLine().trim();
+			} while(!kriteriji[i].matches("^[\\p{L} ]+$"));
+		}
 	}
 	
 	static void labotKritSvaru() {
-		
+		for (int i = 0; i < kriteriji.length; i++) {
+			do {
+				System.out.println("Ievadi "+(i+1)+". kritērija svaru (max: "+maxSvars+")");
+				while(!scan.hasNextInt()) {
+					System.out.println("Ievadi "+(i+1)+". kritērija svaru");
+					scan.next();
+				}
+				kriterijaSvars[i] = scan.nextInt();
+				/* Minimālā KATRA ATLIKUŠĀ kritērija svars ir 5
+				 * kopējai svaru vērtībai ir jābūt 100 (ne mazāk, ne vairāk)
+				*/
+				atlSvars = (maxSvars - kriterijaSvars[i]) / (double)(kriteriji.length - sk);
+			} while(kriterijaSvars[i]>maxSvars || kriterijaSvars[i]<5 || 
+				  (i != kriteriji.length-1 && kriterijaSvars[i] == maxSvars) ||
+				  (i == kriteriji.length-1 && (maxSvars - kriterijaSvars[i])  > 0) 
+				  || atlSvars < 5);
+			maxSvars -= kriterijaSvars[i];
+			sk++;
+			scan.nextLine();
+		}
 	}
 	
 	static void labotIegutoVertejumu() {
-		
+		ievaditVertejumus();
 	}
 	
 	static void glabatFaila() {
