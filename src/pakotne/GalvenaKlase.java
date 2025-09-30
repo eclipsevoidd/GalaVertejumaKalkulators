@@ -1,11 +1,13 @@
 package pakotne;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class GalvenaKlase {
 	
 	static PrintWriter pw;
+	static FileReader fr;
 	
 	static void glabatFaila() throws IOException {
 		pw = new PrintWriter("dati.txt");
@@ -19,11 +21,17 @@ public class GalvenaKlase {
 		}
 	}
 	
-	static void lasitFailu() {
+	static void lasitFailu() throws IOException {
+		fr = new FileReader("dati.txt");
+		int i;
+		while((i = fr.read()) != -1) {
+			System.out.print((char)i);
+		}
+		System.out.println("\n\n\n\n");
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		int input;
 		do {
 			System.out.println("1. Ievadīt audzēkņus\n2. Ievadīt kritērijus\n"
@@ -59,11 +67,7 @@ public class GalvenaKlase {
 				MetozuKlase.aprekins();
 				break;
 			case 9:
-				try {
-					glabatFaila();
-				} catch (IOException e) {
-					System.out.println("Kautkas neiet kopā...");
-				}
+				glabatFaila();
 				break;
 			case 10:
 				lasitFailu();
