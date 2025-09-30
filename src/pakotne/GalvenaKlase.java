@@ -4,6 +4,11 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class GalvenaKlase {
+	static String[] studenti;
+	static String[] kriteriji;
+	static int[] kriterijaSvars;
+	static int[][] kriterijaVertejums;
+	static double[] semestraVertejums;
 	public static void main(String[] args) {
 		int studSk, kritSk;
 		Scanner scan = new Scanner(System.in);
@@ -18,7 +23,7 @@ public class GalvenaKlase {
 			}
 			studSk = scan.nextInt();
 		}while(studSk<1);
-		String[] studenti = new String[studSk];
+		studenti = new String[studSk];
 		
 		// Vērtēšanas kritēriju skaita ievade
 		do {
@@ -29,10 +34,10 @@ public class GalvenaKlase {
 			}
 			kritSk = scan.nextInt();
 		}while(kritSk<1);
-		String[] kriteriji = new String[kritSk];
-		int[] kriterijaSvars = new int[kritSk];
-		int[][] kriterijaVertejums = new int[studSk][kritSk];
-		double[] semestraVertejums = new double[studSk];
+		kriteriji = new String[kritSk];
+		kriterijaSvars = new int[kritSk];
+		kriterijaVertejums = new int[studSk][kritSk];
+		semestraVertejums = new double[studSk];
 		
 		scan.nextLine();
 		
@@ -86,16 +91,6 @@ public class GalvenaKlase {
 					kriterijaVertejums[i][j] = scan.nextInt();
 				}while(kriterijaVertejums[i][j]<0 || kriterijaVertejums[i][j]>10);
 			}
-		}
-		
-		// Gala vērtējuma aprēķināšana
-		double rezultats;
-		for(int i=0; i<studenti.length; i++) {
-			rezultats=0;
-			for(int j=0; j<kriteriji.length; j++) {
-				rezultats += ((double) kriterijaSvars[j]/100)*kriterijaVertejums[i][j];
-			}
-			semestraVertejums[i] = rezultats;
 		}
 		
 		// Gala vērtējumu izvadīšana
