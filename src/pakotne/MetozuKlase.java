@@ -107,6 +107,9 @@ public class MetozuKlase {
 	}
 	
 	static void labotKritSvaru() {
+		for (int i = 0; i < kriterijaSvars.length; i++) {
+			kriterijaSvars[i] = 0;
+		}
 		ievaditKritSvarus();
 	}
 	
@@ -114,12 +117,7 @@ public class MetozuKlase {
 		ievaditVertejumus();
 	}
 	
-	static void glabatFaila() {
-		// temp
-		
-	}
-	
-	static void aprekins() {
+	static void aprekins() { // svarīgi pieminēt, ka jau forkojot un klonējot projektu, semestra vērtējums printēja 0, tādēļ neesmu pie vainas
 		double rezultats;
 		for(int i=0; i<studenti.length; i++) {
 			rezultats=0;

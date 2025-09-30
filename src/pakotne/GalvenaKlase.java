@@ -1,5 +1,7 @@
 package pakotne;
 
+// tā kā nebija pieminēts nekur par JOptionPane izmantošanu, programma realizēta termināļa vidē.
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;

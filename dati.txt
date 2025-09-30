@@ -1,0 +1,8 @@
+Studenta intars vērtējums par kritēriju renāts ir 1, kura svars ir 95.
+Studenta intars vērtējums par kritēriju rāvalds ir 10, kura svars ir 5.
+Semestra vērtējums ir 0 balles.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Studenta rodrigo vērtējums par kritēriju renāts ir 10, kura svars ir 95.
+Studenta rodrigo vērtējums par kritēriju rāvalds ir 1, kura svars ir 5.
+Semestra vērtējums ir 0 balles.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
