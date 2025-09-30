@@ -1,6 +1,27 @@
 package pakotne;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class GalvenaKlase {
+	
+	static PrintWriter pw;
+	
+	static void glabatFaila() throws IOException {
+		pw = new PrintWriter("dati.txt");
+		for(int i=0; i<MetozuKlase.studenti.length; i++) {
+			for(int j=0; j<MetozuKlase.kriteriji.length; j++) {
+				pw.println("Studenta "+MetozuKlase.studenti[i]+" vērtējums par kritēriju "+
+			MetozuKlase.kriteriji[j]+" ir "+MetozuKlase.kriterijaVertejums[i][j]+", kura svars ir "+MetozuKlase.kriterijaSvars[j]);
+			}
+			pw.println("Semestra vērtējums ir "+MetozuKlase.df.format(MetozuKlase.semestraVertejums[i])+" balles"
+					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+		}
+	}
+	
+	static void lasitFailu() {
+		
+	}
 	
 	public static void main(String[] args) {
 		int input;
@@ -38,10 +59,14 @@ public class GalvenaKlase {
 				MetozuKlase.aprekins();
 				break;
 			case 9:
-				MetozuKlase.glabatFaila();
+				try {
+					glabatFaila();
+				} catch (IOException e) {
+					System.out.println("Kautkas neiet kopā...");
+				}
 				break;
 			case 10:
-				MetozuKlase.lasitFailu();
+				lasitFailu();
 				break;
 			case 11:
 				System.out.println("Visu labu!");
@@ -51,16 +76,5 @@ public class GalvenaKlase {
 			}
 		} while(input != 11);
 		
-		// Ievada audzēkņu vārdus, uzvārdus
-		
-		
-		// Definē kritērijus
-			
-		// Norāda katra kritērija svaru
-		
-		// Norāda vērtējumu kādu ieguvis katrs audzēknis par katru kritēriju
-		
-		
-		// Gala vērtējumu izvadīšana
 	}
 }
